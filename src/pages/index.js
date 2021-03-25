@@ -1,67 +1,44 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import get from 'lodash/get'
-import { Helmet } from 'react-helmet'
-import Hero from '../components/hero'
-import Layout from '../components/layout'
-import ArticlePreview from '../components/article-preview'
+import React from 'react';
+import { graphql } from 'gatsby';
+import get from 'lodash/get';
+import { Helmet } from 'react-helmet';
+import Hero from '../components/hero';
+import Layout from '../components/layout';
+import Callout from '../components/callout';
+import Container from '../components/container';
 
 class RootIndex extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allContentfulBlogPost.edges')
-    const [author] = get(this, 'props.data.allContentfulPerson.edges')
+    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
+    const guild = get(this, 'props.data.allContentfulGuild.edges')[0];
+    console.log(guild);
 
     return (
       <Layout location={this.props.location}>
-        <div style={{ background: '#fff' }}>
-          <Helmet title={siteTitle} />
-          <Hero data={author.node} />
+        <Helmet title={siteTitle} />
+        <Hero data={guild.node} />
+        <Container>
           <div className="wrapper">
-            <h2 className="section-headline">Recent articles</h2>
             <ul className="article-list">
-              {posts.map(({ node }) => {
-                return (
-                  <li key={node.slug}>
-                    <ArticlePreview article={node} />
-                  </li>
-                )
-              })}
+              <Callout callout={guild.node.leftCallOut} />
+              <Callout callout={guild.node.centerCallOut} />
+              <Callout callout={guild.node.rightCallOut} />
             </ul>
+            <div className="apply-banner">
+              <img alt="apply banner" src={guild.node.banner.fluid.src} />
+            </div>
           </div>
-        </div>
+        </Container>
       </Layout>
-    )
+    );
   }
 }
 
-export default RootIndex
+export default RootIndex;
 
 export const pageQuery = graphql`
   query HomeQuery {
-    allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
-      edges {
-        node {
-          title
-          slug
-          publishDate(formatString: "MMMM Do, YYYY")
-          tags
-          heroImage {
-            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-              ...GatsbyContentfulFluid_tracedSVG
-            }
-          }
-          description {
-            childMarkdownRemark {
-              html
-            }
-          }
-        }
-      }
-    }
-    allContentfulPerson(
-      filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }
-    ) {
+    allContentfulGuild {
       edges {
         node {
           name
@@ -79,8 +56,28 @@ export const pageQuery = graphql`
               ...GatsbyContentfulFluid_tracedSVG
             }
           }
+          leftCallOut: leftCallOut {
+            fluid(maxWidth: 350, maxHeight: 210) {
+              ...GatsbyContentfulFluid_tracedSVG
+            }
+          }
+          centerCallOut: centerCallOut {
+            fluid(maxWidth: 350, maxHeight: 210) {
+              ...GatsbyContentfulFluid_tracedSVG
+            }
+          }
+          rightCallOut: rightCallOut {
+            fluid(maxWidth: 350, maxHeight: 210) {
+              ...GatsbyContentfulFluid_tracedSVG
+            }
+          }
+          banner: banner {
+            fluid(maxWidth: 700, maxHeight: 176) {
+              ...GatsbyContentfulFluid_tracedSVG
+            }
+          }
         }
       }
     }
   }
-`
+`;

@@ -11,7 +11,6 @@ class RootIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');
     const guild = get(this, 'props.data.allContentfulGuild.edges')[0];
-    console.log(guild);
 
     return (
       <Layout location={this.props.location}>

@@ -11,6 +11,7 @@ class RootIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');
     const guild = get(this, 'props.data.allContentfulGuild.edges')[0];
+    console.log(guild);
 
     return (
       <Layout location={this.props.location}>
@@ -52,27 +53,27 @@ export const pageQuery = graphql`
               resizingBehavior: PAD
               background: "rgb:000000"
             ) {
-              GatsbyContentfulFixed
+              ...GatsbyContentfulFluid
             }
           }
           leftCallOut: leftCallOut {
             fluid(maxWidth: 350, maxHeight: 210) {
-              GatsbyContentfulFixed
+              ...GatsbyContentfulFluid
             }
           }
           centerCallOut: centerCallOut {
             fluid(maxWidth: 350, maxHeight: 210) {
-              GatsbyContentfulFixed
+              ...GatsbyContentfulFluid
             }
           }
           rightCallOut: rightCallOut {
             fluid(maxWidth: 350, maxHeight: 210) {
-              GatsbyContentfulFixed
+              ...GatsbyContentfulFluid
             }
           }
           banner: banner {
             fluid(maxWidth: 700, maxHeight: 176) {
-              GatsbyContentfulFixed
+              ...GatsbyContentfulFluid
             }
           }
         }

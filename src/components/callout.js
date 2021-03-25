@@ -1,8 +1,7 @@
 import React from 'react';
-import Img from 'gatsby-image';
 
 export default ({ callout }) => (
   <div className="callout">
-    <Img alt="" fluid={callout.fluid} />
+    <img alt="apply banner" src={callout.fluid.src} />
   </div>
 );

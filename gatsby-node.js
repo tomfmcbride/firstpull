@@ -27,15 +27,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         const posts = result.data.allContentfulHeroBanner.edges;
-        posts.forEach(post => {
-          createPage({
-            path: `/about/${post.node.slug}/`,
-            component: blogPost,
-            context: {
-              slug: post.node.slug,
-            },
-          });
-        });
+        console.log(posts);
       })
     );
   });

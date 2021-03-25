@@ -43,7 +43,7 @@ export const pageQuery = graphql`
       title
       heroImage {
         fluid(maxWidth: 1180, background: "rgb:000000") {
-          ...GatsbyContentfulFixed
+          GatsbyContentfulFixed
         }
       }
     }

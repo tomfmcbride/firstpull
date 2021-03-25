@@ -53,27 +53,27 @@ export const pageQuery = graphql`
               resizingBehavior: PAD
               background: "rgb:000000"
             ) {
-              ...GatsbyContentfulFixed
+              GatsbyContentfulFixed
             }
           }
           leftCallOut: leftCallOut {
             fluid(maxWidth: 350, maxHeight: 210) {
-              ...GatsbyContentfulFixed
+              GatsbyContentfulFixed
             }
           }
           centerCallOut: centerCallOut {
             fluid(maxWidth: 350, maxHeight: 210) {
-              ...GatsbyContentfulFixed
+              GatsbyContentfulFixed
             }
           }
           rightCallOut: rightCallOut {
             fluid(maxWidth: 350, maxHeight: 210) {
-              ...GatsbyContentfulFixed
+              GatsbyContentfulFixed
             }
           }
           banner: banner {
             fluid(maxWidth: 700, maxHeight: 176) {
-              ...GatsbyContentfulFixed
+              GatsbyContentfulFixed
             }
           }
         }
